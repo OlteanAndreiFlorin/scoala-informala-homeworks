@@ -25,7 +25,7 @@ public class Triangle implements Shape {
 	}
 
 
-	public Triangle(float base, float hight) {
+	public Triangle(float base) {
 		super();
 		this.side = base;
 	}
