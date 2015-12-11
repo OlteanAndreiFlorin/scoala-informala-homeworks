@@ -4,14 +4,12 @@ public class Circle implements Shape {
 
 	private float radius;
 	public static final float PI = 3.14f;
-	
-	
+
 	public float calculateSurface() {
 		float surface = PI * radius * radius;
 		return surface;
 	}
 
-	
 	public float calculatePerimetre() {
 		float perimetre = 2 * PI * radius;
 		return perimetre;
@@ -21,7 +19,6 @@ public class Circle implements Shape {
 		this.radius = radius;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -29,7 +26,6 @@ public class Circle implements Shape {
 		result = prime * result + Float.floatToIntBits(radius);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

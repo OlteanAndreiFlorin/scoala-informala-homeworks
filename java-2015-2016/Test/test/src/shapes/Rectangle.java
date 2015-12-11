@@ -4,17 +4,15 @@ public class Rectangle implements Shape {
 
 	private float side;
 	private float width;
-	
-	
+
 	public float calculateSurface() {
 		float surface = side * width;
 		return surface;
 	}
 
-	
 	public float calculatePerimetre() {
 		float perimetre = side + width;
-		perimetre *=2;
+		perimetre *= 2;
 		return perimetre;
 	}
 
@@ -22,7 +20,6 @@ public class Rectangle implements Shape {
 		this.side = side;
 		this.width = base;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -32,7 +29,6 @@ public class Rectangle implements Shape {
 		result = prime * result + Float.floatToIntBits(width);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

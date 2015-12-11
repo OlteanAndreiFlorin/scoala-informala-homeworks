@@ -3,24 +3,21 @@ package shapes;
 public class Square implements Shape {
 
 	private float side;
-	
+
 	public float calculateSurface() {
-		float surface = side *side;
+		float surface = side * side;
 		return surface;
 	}
 
-	
 	public float calculatePerimetre() {
-		float perimetre = 4*side;
+		float perimetre = 4 * side;
 		return perimetre;
 	}
-
 
 	public Square(int side) {
 		super();
 		this.side = side;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -29,7 +26,6 @@ public class Square implements Shape {
 		result = prime * result + Float.floatToIntBits(side);
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
