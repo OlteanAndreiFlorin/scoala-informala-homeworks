@@ -1,0 +1,11 @@
+package drawingTools;
+
+public class DrawingToolTest {
+
+	DrawingTool d;
+	
+	@Before
+	public void setup(){
+		d= new DrawingTool();
+	}
+}

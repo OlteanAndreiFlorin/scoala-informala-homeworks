@@ -1,0 +1,18 @@
+package drawings;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import shapes.Shape;
+
+public class DrawingTool {
+
+	private List<Shape> shapeList = new ArrayList<>();
+	
+	public void addShape(Shape s){
+		if(shapeList.contains(s)){
+			throw new IllegalArgumentException("Argument alredy in the list")
+		}
+		shapeList.add(s);
+	
+}

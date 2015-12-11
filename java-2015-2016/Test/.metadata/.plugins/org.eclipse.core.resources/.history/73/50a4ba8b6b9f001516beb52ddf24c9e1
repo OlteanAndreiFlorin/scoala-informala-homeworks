@@ -1,0 +1,17 @@
+package drawingTools;
+
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class DrawingToolTest {
+
+	DrawingTool d;
+	
+	@Before
+	public void cleanUp(){
+		d=new DrawingTool();
+	}
+	@Test(expected = NullPointerException.class)
+	public void testAddShape_similar_shape(){
+}

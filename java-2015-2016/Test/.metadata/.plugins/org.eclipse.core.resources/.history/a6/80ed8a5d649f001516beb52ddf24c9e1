@@ -1,0 +1,12 @@
+package shapes;
+
+import org.junit.Before;
+
+public class testRectangle {
+	Rectangle r;
+	@Before
+	public void setup(){
+		r = new Regtangle Rectangle(10, 20);
+	}
+
+}

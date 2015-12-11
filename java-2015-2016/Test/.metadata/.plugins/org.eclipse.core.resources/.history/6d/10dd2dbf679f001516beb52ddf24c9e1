@@ -1,0 +1,26 @@
+package shapes;
+
+public class Rectangle implements Shape {
+
+	private float side;
+	private float width;
+	
+	
+	public float calculateSurface() {
+		float surface = side * width;
+		return surface;
+	}
+
+	
+	public float calculatePerimetre() {
+		float perimetre = side + width;
+		perimetre *=2;
+		return perimetre;
+	}
+
+	public Rectangle(int side, int base) {
+		this.side = side;
+		this.width = base;
+	}
+
+}

@@ -1,0 +1,13 @@
+package drawingTools;
+
+import org.junit.After;
+
+public class DrawingToolTest {
+
+	DrawingTool d;
+	
+	@After
+	public void cleanUp(){
+		d=new DrawingTool();
+	}
+}

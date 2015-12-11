@@ -1,0 +1,17 @@
+package shapes;
+
+public class Square implements Shape {
+
+	@Override
+	public int calculateSurface() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int calculatePerimetre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

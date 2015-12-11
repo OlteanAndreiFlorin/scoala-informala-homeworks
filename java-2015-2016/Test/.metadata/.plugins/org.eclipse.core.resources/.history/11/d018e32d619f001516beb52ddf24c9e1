@@ -1,0 +1,24 @@
+package shapes;
+
+public class Square implements Shape {
+
+	private int side;
+	
+	public int calculateSurface() {
+		int surface = side *side;
+		return surface;
+	}
+
+	
+	public int calculatePerimetre() {
+		int perimetre = 4*side;
+		return perimetre;
+	}
+
+
+	public Square(int side) {
+		super();
+		this.side = side;
+	}
+
+}

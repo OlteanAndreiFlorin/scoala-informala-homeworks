@@ -1,0 +1,27 @@
+package shapes;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ShapeTest {
+	public Rectangle r;
+	
+	@Before
+	public void setup(){
+		r = new Rectangle(10, 20);
+	}
+	
+	@Test
+	public void testCalculateSurface(){
+		float expected = 200;
+		float actual = r.calculateSurface();
+		Assert.assertEquals(expected, actual ,0);
+	}
+	@Test
+	public void testCalculatePErimetre(){
+		float expected=60;
+		float actual=r.calculatePerimetre();
+		Assert.assertEquals(expected, actual ,0);
+	}
+}

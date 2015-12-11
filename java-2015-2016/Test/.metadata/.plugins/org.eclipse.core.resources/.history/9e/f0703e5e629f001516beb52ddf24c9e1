@@ -1,0 +1,17 @@
+package shapes;
+
+public class Triangle implements Shape {
+
+	@Override
+	public float calculateSurface() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float calculatePerimetre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

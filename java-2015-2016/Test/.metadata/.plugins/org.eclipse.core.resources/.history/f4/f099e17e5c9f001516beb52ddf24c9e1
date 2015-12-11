@@ -1,0 +1,22 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Test {
+
+	public static void main(String[] args) {
+		int x =1;
+		int y =2;
+		s(x,y);
+		System.out.println(x+" "+y);
+		List<? extends Number> n = new ArrayList<Integer>();
+
+	}
+	public static void s(int a, int b){
+		int aux = a;
+		a=b;
+		b=aux;
+	}
+
+}

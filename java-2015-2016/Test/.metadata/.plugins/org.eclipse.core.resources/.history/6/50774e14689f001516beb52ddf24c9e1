@@ -1,0 +1,17 @@
+package drawings;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import shapes.Shape;
+
+public class DrawingTool {
+
+	private List<Shape> shapeList = new ArrayList<>();
+	
+	public void addShape(Shape s){
+		shapeList.
+		shapeList.add(s);
+	}
+	
+}

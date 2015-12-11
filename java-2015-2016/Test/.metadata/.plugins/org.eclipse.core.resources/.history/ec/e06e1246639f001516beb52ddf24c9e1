@@ -1,0 +1,31 @@
+package shapes;
+
+public class Triangle implements Shape {
+
+	private float sideA;
+	private float sideB;
+	private float base;
+	private float hight;
+	
+	public float calculateSurface() {
+		float surface = base * hight;
+		surface /=2;
+		return surface;
+	}
+
+	
+	public float calculatePerimetre() {
+		
+		return 0;
+	}
+
+
+	public Triangle(float sideA, float sideB, float sideC, float hight) {
+		super();
+		this.sideA = sideA;
+		this.sideB = sideB;
+		this.base = sideC;
+		this.hight = hight;
+	}
+
+}

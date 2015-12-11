@@ -1,0 +1,23 @@
+package drawingTools;
+
+
+import org.junit.Before;
+import org.junit.Test;
+
+import shapes.Circle;
+import shapes.Shape;
+
+public class DrawingToolTest {
+
+	DrawingTool d;
+	Shape c = new Circle(10);
+	
+	@Before
+	public void cleanUp(){
+		d=new DrawingTool();
+	}
+	@Test(expected = NullPointerException.class)
+	public void testAddShape_similar_shape(){
+		d.addShape();
+	}
+}

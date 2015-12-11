@@ -1,0 +1,24 @@
+package shapes;
+
+public class Circle implements Shape {
+
+	private float radius;
+	public static final float PI = 3.14f;
+	
+	
+	public float calculateSurface() {
+		float surface = PI * radius * radius;
+		return surface;
+	}
+
+	
+	public float calculatePerimetre() {
+		float perimetre = 2 * PI * radius;
+		return perimetre;
+	}
+
+	public Circle(float radius) {
+		this.radius = radius;
+	}
+
+}

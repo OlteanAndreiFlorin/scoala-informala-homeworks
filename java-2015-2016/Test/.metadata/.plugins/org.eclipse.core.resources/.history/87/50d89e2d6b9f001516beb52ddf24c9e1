@@ -1,0 +1,13 @@
+package drawingTools;
+
+
+
+public class DrawingToolTest {
+
+	DrawingTool d=new DrawingTool();
+	
+	@After
+	public void cleanUp(){
+		d=new DrawingTool();
+	}
+}

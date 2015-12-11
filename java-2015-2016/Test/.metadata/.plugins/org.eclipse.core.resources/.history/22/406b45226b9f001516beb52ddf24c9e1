@@ -1,0 +1,10 @@
+package drawingTools;
+
+
+
+public class DrawingToolTest {
+
+	DrawingTool d=new DrawingTool();
+	
+	
+}

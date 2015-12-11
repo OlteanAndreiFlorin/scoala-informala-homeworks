@@ -1,0 +1,22 @@
+package test;
+
+
+
+public class Test {
+
+	public static void main(String[] args) {
+		new Al("s");
+		
+
+	}
+	
+	class Al{
+		public Al(){
+			System.out.println(1);
+		}
+		public Al(String args){
+			this();
+			}
+		}
+
+}

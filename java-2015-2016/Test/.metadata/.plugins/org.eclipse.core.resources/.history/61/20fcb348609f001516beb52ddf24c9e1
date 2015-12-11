@@ -1,0 +1,25 @@
+package shapes;
+
+public class Rectangle implements Shape {
+
+	private int side;
+	private int base;
+	
+	
+	public int calculateSurface() {
+		int surface = side * base;
+		return surface;
+	}
+
+	@Override
+	public int calculatePerimetre() {
+	
+		return 0;
+	}
+
+	public Rectangle(int side, int base) {
+		this.side = side;
+		this.base = base;
+	}
+
+}
