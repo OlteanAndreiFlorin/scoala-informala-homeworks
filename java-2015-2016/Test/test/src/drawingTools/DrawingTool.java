@@ -37,5 +37,10 @@ public class DrawingTool {
 		}
 		return totalPerimeter;
 	}
-	
+	/**
+	 * @return An ArrayList with all the shapes stored inside
+	 */
+	public final List<Shape> getShapeList(){
+		return new ArrayList<Shape>(shapeList);
+	}
 }
