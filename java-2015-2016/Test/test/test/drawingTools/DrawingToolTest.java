@@ -19,7 +19,7 @@ public class DrawingToolTest {
 	Shape s = new Square(10);
 	Shape t = new Triangle(10);
 	
-	class MokShape implements Shape{
+	class MockShape implements Shape{
 
 		@Override
 		public float calculateSurface() {
@@ -59,9 +59,9 @@ public class DrawingToolTest {
 	}
 	@Test
 	public void testCalculateTotalSurface_3_mokShapes(){
-		d.addShape(new MokShape());
-		d.addShape(new MokShape());
-		d.addShape(new MokShape());
+		d.addShape(new MockShape());
+		d.addShape(new MockShape());
+		d.addShape(new MockShape());
 		Assert.assertEquals(3, d.calculateTotalSurface(), 0);
 	}
 	
@@ -71,9 +71,9 @@ public class DrawingToolTest {
 	}
 	@Test
 	public void testCalculateTotalPerimeter_3_mokShapes(){
-		d.addShape(new MokShape());
-		d.addShape(new MokShape());
-		d.addShape(new MokShape());
+		d.addShape(new MockShape());
+		d.addShape(new MockShape());
+		d.addShape(new MockShape());
 		Assert.assertEquals(3, d.calculateTotalPerimeter(), 0);
 	}
 }
