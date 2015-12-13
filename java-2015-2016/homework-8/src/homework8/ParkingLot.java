@@ -1,7 +1,9 @@
 package homework8;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingLot<T> {
 
@@ -9,45 +11,63 @@ public class ParkingLot<T> {
 	private int floorSize;
 	private List<Floor<T>> parkingLot = new ArrayList<>(parkingLootSize);
 
-	private class Floor<E> {
+	private final class Floor<E> {
 		private int floorSize;
-		private List<E> floor = new ArrayList<>(floorSize);// 10 spaces for each
-															// floor
+		private Map<Integer, E> floor = new LinkedHashMap<>(floorSize);
 
 		public Floor(int floorSize) {
-			super();
 			this.floorSize = floorSize;
+			numberFloor();
+		}
+
+		private final void numberFloor() {
+			for (int i = 1; i <= this.floorSize; i++) {
+				floor.put(i, null);
+			}
+		}
+
+		private final int findEmptySpot() throws IllegalAccessException {
+			for (int spotNumber : floor.keySet()) {
+				if (floor.get(spotNumber) == null) {
+					return spotNumber;
+				}
+			}
+			throw new IllegalAccessException("This floor is full!");
 		}
 
 		/**
 		 * 
-		 * @param vehicle
-		 *            vehicle to be parked
+		 * @param element
+		 *            The object to be saved
 		 * @return The parking spot of that vehicle on this floor
-		 * @throws ArrayIndexOutOfBoundsException
-		 *             if the floor is full
+		 * @throws IllegalAccessException
+		 *             if the floor is full.
 		 */
-		public final int park(E vehicle) {
-			if (floor.size() == this.floorSize) {
-				throw new ArrayIndexOutOfBoundsException("This floor is full");
-			}
-			floor.add(vehicle);
-			return floor.indexOf(vehicle);
+		public final int park(E element) throws IllegalAccessException {
+			int emptySpot = findEmptySpot();
+			floor.put(emptySpot, element);
+			return emptySpot;
 		}
 
 		/**
 		 * 
 		 * @param parkingSpot
-		 * @return The vehicle parked in this ParkingSpot
+		 * @return The object saved in this ParkingSpot or null if there is no
+		 *         object on that spot
 		 */
 		public final E retrieve(int parkingSpot) {
-			return floor.remove(parkingSpot);
+			E element = floor.get(parkingSpot);
+			floor.put(parkingSpot, null);
+			return element;
+
 		}
 
 		public final boolean isNotFull() {
 
-			if (floor.size() < this.floorSize) {
-				return true;
+			for (E element : floor.values()) {
+				if (element == null) {
+					return true;
+				}
 			}
 			return false;
 		}
@@ -72,8 +92,26 @@ public class ParkingLot<T> {
 	 */
 	public final ParkingTiket parkVehicle(T vehicle) throws ArrayIndexOutOfBoundsException {
 		int notFullFloor = findNotFullFloor();
-		int spotOnFloor = parkingLot.get(notFullFloor).park(vehicle);
+		int spotOnFloor = 0;
+		try {
+			spotOnFloor = parkingLot.get(notFullFloor).park(vehicle);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			System.exit(1);// This should never happen but just in case:P
+		}
 		return new ParkingTiket(notFullFloor, spotOnFloor);
+	}
+
+	/**
+	 * 
+	 * @param ticket
+	 *            Parking ticket.
+	 * @return the vehicle parked at the specified spot or null if there is no
+	 *         car there.
+	 */
+	public final T retrieveVehicle(ParkingTiket ticket) {
+
+		return parkingLot.get(ticket.getFloor()).retrieve(ticket.getSpotOnFloor());
 	}
 
 	public ParkingLot(int parkingLootSize, int floorSize) {

@@ -20,7 +20,7 @@ public class ParkingLotTest {
 
 	@Test
 	public void testParkVehicle_first_parking() {
-		ParkingTiket expected = new ParkingTiket(0, 0);
+		ParkingTiket expected = new ParkingTiket(0, 1);
 		ParkingTiket actual = carPark.parkVehicle(new MockVehicle());
 		Assert.assertEquals(expected, actual);
 	}
@@ -31,4 +31,5 @@ public class ParkingLotTest {
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
 	}
+
 }
