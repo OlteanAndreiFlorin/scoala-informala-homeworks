@@ -25,11 +25,31 @@ public class ParkingLotTest {
 		Assert.assertEquals(expected, actual);
 	}
 
-	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	@Test(expected = UnsupportedOperationException.class)
 	public void testParkVehicle_pakingLot_full() {
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testRetrieveVehicle_invalid_floor_spot() {
+		ParkingTiket ticket = new ParkingTiket(0, 5);
+		carPark.retrieveVehicle(ticket);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testRetrieveVehicle_invalid_floor() {
+		ParkingTiket ticket = new ParkingTiket(5, 0);
+		carPark.retrieveVehicle(ticket);
+	}
+
+	@Test
+	public void testRetrieveVehicle() {
+		MockVehicle expected = new MockVehicle();
+		ParkingTiket t = carPark.parkVehicle(expected);
+		MockVehicle actual = carPark.retrieveVehicle(t);
+		Assert.assertEquals(expected, actual);
 	}
 
 }
