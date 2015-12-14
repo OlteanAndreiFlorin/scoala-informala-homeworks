@@ -14,8 +14,8 @@ import java.util.Map;
  * @author Oltean Andrei-Florin
  *
  * @param <E>
- *            Type of object to be used in the class specified in the
- *            initialization of this class;
+ *            Type of object to be used in the class specified when
+ *            instantiating the class;
  */
 public class ParkingLot<E> {
 
