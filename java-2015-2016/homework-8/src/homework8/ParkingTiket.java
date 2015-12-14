@@ -4,9 +4,15 @@ public class ParkingTiket {
 
 	private final int floor;
 	private final int spotOnFloor;
-	public ParkingTiket(int floor, int spotOnFloor) {
+	public ParkingTiket(int floor, int spotOnFloor)throws IllegalArgumentException {
+		validate(floor,spotOnFloor);
 		this.floor = floor;
 		this.spotOnFloor = spotOnFloor;
+	}
+	private final void validate(int floor,int spot){
+		if(floor<0||spot<0){
+			throw new IllegalArgumentException("Cant be negative numbers");
+		}
 	}
 	/**
 	 * @return the floor
