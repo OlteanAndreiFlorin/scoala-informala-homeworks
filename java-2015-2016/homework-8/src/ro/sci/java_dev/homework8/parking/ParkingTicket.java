@@ -5,13 +5,19 @@ public class ParkingTicket {
 	private final int numberOfFloors;
 	private final int spotOnFloor;
 
+	/**
+	 * constructor for parking ticket
+	 * @param numberOfFloors
+	 * @param spotOnFloor
+	 * @throws IllegalArgumentException if you pass an illegal spot on floor number
+	 */
 	public ParkingTicket(int numberOfFloors, int spotOnFloor) throws IllegalArgumentException {
-		validate(numberOfFloors, spotOnFloor);
+		validate(spotOnFloor);
 		this.numberOfFloors = numberOfFloors;
 		this.spotOnFloor = spotOnFloor;
 	}
 
-	private final void validate(int numberOfFloors, int spotOnFloor) {
+	private final void validate(int spotOnFloor) {
 		if (spotOnFloor < 0) {
 			throw new IllegalArgumentException("The spot on froos cant be negative numbers");
 		}

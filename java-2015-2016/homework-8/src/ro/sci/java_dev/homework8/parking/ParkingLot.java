@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Represents a parking lot. A parkingLot can store multiple instances of type T
  * by using the {@link #parkVehicle(Object)} receiving a parking ticket, and
- * retrieve them using {@link #retrieveVehicle(ParkingTiket)} presenting the
+ * retrieve them using {@link #retrieveVehicle(ParkingTicket)} presenting the
  * parking ticket provided.
  * 
  * @author Oltean Andrei-Florin
@@ -19,6 +19,7 @@ import java.util.Map;
  */
 public class ParkingLot<E> {
 
+	private String parkingLotType = "Standard";
 	private int numberOfFloors;
 	private int floorSize;
 	private List<Floor<E>> parkingLot = new ArrayList<>(numberOfFloors);
@@ -114,7 +115,7 @@ public class ParkingLot<E> {
 	 * @throws UnsupportedOperationException
 	 *             if the parking lot is full
 	 */
-	public final ParkingTiket parkVehicle(E vehicle) throws UnsupportedOperationException {
+	public final ParkingTicket parkVehicle(E vehicle) throws UnsupportedOperationException {
 		int notFullFloor = findNotFullFloor();
 		int spotOnFloor = 0;
 		try {
@@ -124,7 +125,11 @@ public class ParkingLot<E> {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		return new ParkingTiket(notFullFloor, spotOnFloor);
+		if ("Standard".equals(parkingLotType)) {
+			return new ParkingTicket(notFullFloor, spotOnFloor);
+		} else {
+			return new ParkingTicket(-notFullFloor, spotOnFloor);
+		}
 	}
 
 	/**
@@ -134,12 +139,24 @@ public class ParkingLot<E> {
 	 * @return the vehicle parked at the specified spot or null if there is no
 	 *         car there.
 	 */
-	public final E retrieveVehicle(ParkingTiket ticket) throws IllegalArgumentException {
-
-		if (ticket.getFloor() > this.numberOfFloors) {
-			throw new IllegalArgumentException("This parking loot dose not have that manny floors");
+	public final E retrieveVehicle(ParkingTicket ticket) throws IllegalArgumentException {
+		if ("Standard".equals(parkingLotType) && ticket.getNumberOfFloors() < 0) {
+			throw new IllegalArgumentException("Not a valid parking ticket for this instance");
 		}
-		return parkingLot.get(ticket.getFloor()).retrieve(ticket.getSpotOnFloor());
+		if (!"Standard".equals(parkingLotType) && ticket.getNumberOfFloors() > 0) {
+			throw new IllegalArgumentException("Not a valid parking ticket for this instance");
+		}
+		if ("Standard".equals(parkingLotType)) {
+			if (ticket.getNumberOfFloors() > this.numberOfFloors) {
+				throw new IllegalArgumentException("This parking loot dose not have that manny floors");
+			}
+			return parkingLot.get(ticket.getNumberOfFloors()).retrieve(ticket.getSpotOnFloor());
+		} else {
+			if (-ticket.getNumberOfFloors() > this.numberOfFloors) {
+				throw new IllegalArgumentException("This parking loot dose not have that manny floors");
+			}
+			return parkingLot.get(-ticket.getNumberOfFloors()).retrieve(ticket.getSpotOnFloor());
+		}
 	}
 
 	private final void constructBuilding() {
@@ -149,7 +166,30 @@ public class ParkingLot<E> {
 
 	}
 
+	/**
+	 * Standard constructor for the parking lot;
+	 * 
+	 * @param numberOfFloors
+	 * @param floorSize
+	 */
 	public ParkingLot(int numberOfFloors, int floorSize) {
+		this.numberOfFloors = numberOfFloors;
+		this.floorSize = floorSize;
+		constructBuilding();
+	}
+
+	/**
+	 * Constructor for underground parking lot; If any string is passed as the
+	 * parking lot type it will automatically presume is an underground parking
+	 * lot except when the type passed is Standard in witch case it will handle
+	 * is as if no type was passed;
+	 * 
+	 * @param parkingLotType
+	 * @param numberOfFloors
+	 * @param floorSize
+	 */
+	public ParkingLot(String parkingLotType, int numberOfFloors, int floorSize) {
+		this.parkingLotType = parkingLotType;
 		this.numberOfFloors = numberOfFloors;
 		this.floorSize = floorSize;
 		constructBuilding();
@@ -162,7 +202,8 @@ public class ParkingLot<E> {
 	 */
 	@Override
 	public String toString() {
-		return "ParkingLot [parkingLootSize=" + numberOfFloors + ", floorSize=" + floorSize + "]";
+		return "ParkingLot [parkingLotType=" + parkingLotType + ", numberOfFloors=" + numberOfFloors + ", floorSize="
+				+ floorSize + "]";
 	}
 
 }
