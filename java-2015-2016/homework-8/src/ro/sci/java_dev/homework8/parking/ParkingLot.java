@@ -138,6 +138,7 @@ public class ParkingLot<E> {
 	 *            Parking ticket.
 	 * @return the vehicle parked at the specified spot or null if there is no
 	 *         car there.
+	 *@throws IllegalArgumentException if the ticket passed is invalid;
 	 */
 	public final E retrieveVehicle(ParkingTicket ticket) throws IllegalArgumentException {
 		if ("Standard".equals(parkingLotType) && ticket.getNumberOfFloors() < 0) {
@@ -166,14 +167,23 @@ public class ParkingLot<E> {
 
 	}
 
+	private final void validateFloorSize(int floorSize) throws IllegalArgumentException {
+		if (floorSize < 1) {
+			throw new IllegalArgumentException("The floor needs to have at least 1 spot on it");
+		}
+	}
+
 	/**
 	 * Standard constructor for the parking lot;
 	 * 
 	 * @param numberOfFloors
 	 * @param floorSize
+	 * @throws IllegalArgumentException
+	 *             if an invalid floor size is passed
 	 */
-	public ParkingLot(int numberOfFloors, int floorSize) {
+	public ParkingLot(int numberOfFloors, int floorSize) throws IllegalArgumentException {
 		this.numberOfFloors = numberOfFloors;
+		validateFloorSize(floorSize);
 		this.floorSize = floorSize;
 		constructBuilding();
 	}
@@ -187,10 +197,13 @@ public class ParkingLot<E> {
 	 * @param parkingLotType
 	 * @param numberOfFloors
 	 * @param floorSize
+	 * @throws IllegalArgumentException
+	 *             if an invalid floor size is passed
 	 */
-	public ParkingLot(String parkingLotType, int numberOfFloors, int floorSize) {
+	public ParkingLot(String parkingLotType, int numberOfFloors, int floorSize) throws IllegalArgumentException {
 		this.parkingLotType = parkingLotType;
 		this.numberOfFloors = numberOfFloors;
+		validateFloorSize(floorSize);
 		this.floorSize = floorSize;
 		constructBuilding();
 	}

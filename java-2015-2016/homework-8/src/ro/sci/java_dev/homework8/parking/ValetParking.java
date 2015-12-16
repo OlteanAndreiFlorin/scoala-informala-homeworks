@@ -11,10 +11,13 @@ public class ValetParking<T extends Vehicle> {
 	private int numberOfFloors = 5;// default number of floors for a parking
 									// lot;
 	private int floorSize = 20;// default size for each floor;
+
+	private String parkingLotType = "Standard";
+
 	private ParkingLot<T> carPark;
 
-	private final void setUpParkingLot() {
-		this.carPark = new ParkingLot<>(numberOfFloors, floorSize);
+	private final void setUpParkingLot()throws IllegalArgumentException {
+		this.carPark = new ParkingLot<>(this.parkingLotType, this.numberOfFloors, this.floorSize);
 	}
 
 	/**
@@ -53,7 +56,11 @@ public class ValetParking<T extends Vehicle> {
 	 *             if the car was mishandled(runs out of gas)
 	 */
 	public final T retrieveVehicle(ParkingTicket ticket) throws IllegalArgumentException, RuntimeException {
+		
 		T vehicle = carPark.retrieveVehicle(ticket);
+		if(vehicle==null){
+			return null;
+		}
 		vehicle.start();
 		for (int i = ticket.getNumberOfFloors(); i > 0; i--) {
 			vehicle.drive(distanceBetwenFloors);
@@ -74,14 +81,36 @@ public class ValetParking<T extends Vehicle> {
 	/**
 	 * constructor for custom parking lot where the number of floors and floors
 	 * size are passed; If no arguments are passed the default sizes will be
-	 * used(default number of floors is 5,default size for each floor is 20)
+	 * used(default number of floors is 5,default size for each floor is 20) and
+	 * type will be passed as Standard;
 	 * 
 	 * @param numberOfFloors
 	 * @param floorSize
+	 * @throws IllegalArgumentException
+		 *             if the parking number passed is invalid;
 	 */
-	public ValetParking(int numberOfFloors, int floorSize) {
+	public ValetParking(int numberOfFloors, int floorSize)throws IllegalArgumentException {
 		this.numberOfFloors = numberOfFloors;
 		this.floorSize = floorSize;
+		setUpParkingLot();
+	}
+
+	/**
+	 * constructor for custom parking lot where the number of floors, floors
+	 * size and type of parking lot are passed(any type other than Standard will
+	 * be classified as underground parking lot)
+	 * Default settings are: number of floors= 5;floor size=20;type=Standard;
+	 * 
+	 * @param parkingLotType
+	 * @param numberOfFloors
+	 * @param floorSize
+	 * @throws IllegalArgumentException
+		 *             if the parking number passed is invalid;
+	 */
+	public ValetParking(String parkingLotType, int numberOfFloors, int floorSize)throws IllegalArgumentException {
+		this.numberOfFloors = numberOfFloors;
+		this.floorSize = floorSize;
+		this.parkingLotType = parkingLotType;
 		setUpParkingLot();
 	}
 
@@ -127,5 +156,17 @@ public class ValetParking<T extends Vehicle> {
 	 */
 	public final void setDistanceBetwenFloors(float distanceBetwenFloors) {
 		this.distanceBetwenFloors = distanceBetwenFloors;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ValetParking [distanceToParkingLot=" + distanceToParkingLot + ", distanceBetwenFloors="
+				+ distanceBetwenFloors + ", numberOfFloors=" + numberOfFloors + ", floorSize=" + floorSize
+				+ ", carPark=" + carPark.toString() + "]";
 	}
 }

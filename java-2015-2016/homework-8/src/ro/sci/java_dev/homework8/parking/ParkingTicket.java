@@ -7,9 +7,11 @@ public class ParkingTicket {
 
 	/**
 	 * constructor for parking ticket
+	 * 
 	 * @param numberOfFloors
 	 * @param spotOnFloor
-	 * @throws IllegalArgumentException if you pass an illegal spot on floor number
+	 * @throws IllegalArgumentException
+	 *             if you pass an illegal spot on floor number(must be >0);
 	 */
 	public ParkingTicket(int numberOfFloors, int spotOnFloor) throws IllegalArgumentException {
 		validate(spotOnFloor);

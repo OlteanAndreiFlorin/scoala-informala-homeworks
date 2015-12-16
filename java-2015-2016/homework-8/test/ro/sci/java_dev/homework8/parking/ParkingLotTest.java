@@ -34,25 +34,31 @@ public class ParkingLotTest {
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
 	}
-	
+
 	@Test
-	public void testParkVehicle_underground_normal_parking(){
-		carPark=new ParkingLot<>("Banana", 2, 1);
+	public void testParkVehicle_underground_normal_parking() {
+		carPark = new ParkingLot<>("Banana", 2, 1);
 		ParkingTicket expected = new ParkingTicket(-1, 1);
 		carPark.parkVehicle(new MockVehicle());
 		ParkingTicket actual = carPark.parkVehicle(new MockVehicle());
 		Assert.assertEquals(expected, actual);
 	}
+
 	@Test(expected = UnsupportedOperationException.class)
 	public void testParkVehicle_underground_pakingLot_full() {
-		carPark= new ParkingLot<>("", 2, 1);
+		carPark = new ParkingLot<>("", 2, 1);
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
 		carPark.parkVehicle(new MockVehicle());
 	}
-	
-	@Test(expected= IllegalArgumentException.class)
-	public void testRetrieveVehicle_invalid_parkingTicket_standard(){
+
+	@Test
+	public void testRetrieveVehicle_no_car_found() {
+		Assert.assertNull(carPark.retrieveVehicle(new ParkingTicket(0, 1)));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testRetrieveVehicle_invalid_parkingTicket_standard() {
 		carPark.retrieveVehicle(new ParkingTicket(-1, 1));
 	}
 
@@ -75,12 +81,13 @@ public class ParkingLotTest {
 		MockVehicle actual = carPark.retrieveVehicle(t);
 		Assert.assertEquals(expected, actual);
 	}
-	
-	@Test(expected= IllegalArgumentException.class)
-	public void testRetrieveVehicle_invalid_parkingTicket_underground(){
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testRetrieveVehicle_invalid_parkingTicket_underground() {
 		carPark = new ParkingLot<>("Underground", 2, 1);
 		carPark.retrieveVehicle(new ParkingTicket(1, 1));
 	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testRetrieveVehicle_invalid_floor_spot_underground() {
 		carPark = new ParkingLot<>("Underground", 2, 1);
