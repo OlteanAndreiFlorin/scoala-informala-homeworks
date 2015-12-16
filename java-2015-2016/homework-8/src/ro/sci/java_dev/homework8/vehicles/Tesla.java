@@ -1,4 +1,4 @@
-package ro.sci.cars;
+package ro.sci.java_dev.homework8.vehicles;
 /**
  * Tesla is the abstract bases class for all Tesla cars created
  * Extends from Car() class

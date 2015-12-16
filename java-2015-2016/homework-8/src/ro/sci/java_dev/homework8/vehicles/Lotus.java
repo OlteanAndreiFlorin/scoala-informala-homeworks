@@ -1,4 +1,4 @@
-package ro.sci.cars;
+package ro.sci.java_dev.homework8.vehicles;
 /**
  * Lotus is the abstract bases class for all Lotus cars created
  * Extends from Car() class;

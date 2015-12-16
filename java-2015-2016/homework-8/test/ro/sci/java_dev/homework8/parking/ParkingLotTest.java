@@ -1,8 +1,11 @@
-package homework8;
+package ro.sci.java_dev.homework8.parking;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import ro.sci.java_dev.homework8.parking.ParkingLot;
+import ro.sci.java_dev.homework8.parking.ParkingTiket;
 
 public class ParkingLotTest {
 

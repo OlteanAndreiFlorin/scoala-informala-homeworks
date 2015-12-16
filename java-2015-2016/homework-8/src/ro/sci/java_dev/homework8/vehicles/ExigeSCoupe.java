@@ -1,4 +1,4 @@
-package ro.sci.cars;
+package ro.sci.java_dev.homework8.vehicles;
 
 public class ExigeSCoupe extends Lotus {
 	protected static final float FUEL_TANK_SIZE =60; //Factory specifications
@@ -49,6 +49,37 @@ public class ExigeSCoupe extends Lotus {
 			throw new RuntimeException("Too mutch fuel!");
 		}
 		this.chassisNumber = chassisNumber;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((chassisNumber == null) ? 0 : chassisNumber.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExigeSCoupe other = (ExigeSCoupe) obj;
+		if (chassisNumber == null) {
+			if (other.chassisNumber != null)
+				return false;
+		} else if (!chassisNumber.equals(other.chassisNumber))
+			return false;
+		return true;
 	}
 
 	
