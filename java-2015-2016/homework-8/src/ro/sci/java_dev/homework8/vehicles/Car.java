@@ -17,7 +17,7 @@ public abstract class Car implements Vehicle {
 	protected float fuleConsumedThisTrip = 0;
 	protected float pollutionThisTrip  = 0;
 	protected float tripLengthTotal=0;
-	private int currentGear=0;
+	private int currentGear=1;
 	private float totalFuelUsed=0;
 	private float totalPollutionStats=0;
 	private boolean carStatus;

@@ -1,4 +1,4 @@
-package homework8;
+package ro.sci.java_dev.homework8.parking;
 
 public class ParkingTiket {
 

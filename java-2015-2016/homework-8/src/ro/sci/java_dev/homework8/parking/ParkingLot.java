@@ -1,4 +1,4 @@
-package homework8;
+package ro.sci.java_dev.homework8.parking;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,9 +19,9 @@ import java.util.Map;
  */
 public class ParkingLot<E> {
 
-	private int parkingLootSize;
+	private int numberOfFloors;
 	private int floorSize;
-	private List<Floor<E>> parkingLot = new ArrayList<>(parkingLootSize);
+	private List<Floor<E>> parkingLot = new ArrayList<>(numberOfFloors);
 
 	@SuppressWarnings("hiding")
 	private final class Floor<E> {
@@ -119,9 +119,10 @@ public class ParkingLot<E> {
 		int spotOnFloor = 0;
 		try {
 			spotOnFloor = parkingLot.get(notFullFloor).park(vehicle);
-		} catch (UnsupportedOperationException e) {
+		} catch (UnsupportedOperationException e) {// This should never happen
+													// but just in case:P
 			e.printStackTrace();
-			System.exit(1);// This should never happen but just in case:P
+			System.exit(1);
 		}
 		return new ParkingTiket(notFullFloor, spotOnFloor);
 	}
@@ -135,23 +136,23 @@ public class ParkingLot<E> {
 	 */
 	public final E retrieveVehicle(ParkingTiket ticket) throws IllegalArgumentException {
 
-		if (ticket.getFloor() > this.parkingLootSize) {
+		if (ticket.getFloor() > this.numberOfFloors) {
 			throw new IllegalArgumentException("This parking loot dose not have that manny floors");
 		}
 		return parkingLot.get(ticket.getFloor()).retrieve(ticket.getSpotOnFloor());
 	}
 
-	public ParkingLot(int parkingLootSize, int floorSize) {
-		this.parkingLootSize = parkingLootSize;
-		this.floorSize = floorSize;
-		constructBuilding();
-	}
-
 	private final void constructBuilding() {
-		for (int i = 0; i < parkingLootSize; i++) {
+		for (int i = 0; i < numberOfFloors; i++) {
 			parkingLot.add(new Floor<E>(this.floorSize));
 		}
 
+	}
+
+	public ParkingLot(int numberOfFloors, int floorSize) {
+		this.numberOfFloors = numberOfFloors;
+		this.floorSize = floorSize;
+		constructBuilding();
 	}
 
 	/*
@@ -161,7 +162,7 @@ public class ParkingLot<E> {
 	 */
 	@Override
 	public String toString() {
-		return "ParkingLot [parkingLootSize=" + parkingLootSize + ", floorSize=" + floorSize + "]";
+		return "ParkingLot [parkingLootSize=" + numberOfFloors + ", floorSize=" + floorSize + "]";
 	}
 
 }
