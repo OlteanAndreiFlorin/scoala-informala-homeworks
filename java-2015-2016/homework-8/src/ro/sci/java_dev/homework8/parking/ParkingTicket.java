@@ -1,5 +1,12 @@
 package ro.sci.java_dev.homework8.parking;
 
+/**
+ * Parking tickets can be created using this class witch save information about
+ * a parking spot(Floor nr. and spot nr.);
+ * 
+ * @author Oltean-Andrei-Florin
+ *
+ */
 public class ParkingTicket {
 
 	private final int numberOfFloors;

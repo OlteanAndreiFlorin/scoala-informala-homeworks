@@ -2,6 +2,16 @@ package ro.sci.java_dev.homework8.parking;
 
 import ro.sci.java_dev.homework8.vehicles.Vehicle;
 
+/**
+ * ValetParking "valets" can be instantiated that will use the
+ * {@link #parkVehicle(Vehicle) parkVehicle} method to drive and park your vehicle receiving
+ * a parking {@link ro.sci.java_dev.homework8.parking.ParkingTicket ticket}
+ * witch can be used to {@link #retrieveVehicle(ParkingTicket) retrieve} the car;
+ * 
+ * @author Oltean Andrei-Florin
+ *
+ * @param <T> type of vehicle expected 
+ */
 public class ValetParking<T extends Vehicle> {
 
 	private float distanceToParkingLot = 0.05f;// default distance to the
@@ -16,7 +26,7 @@ public class ValetParking<T extends Vehicle> {
 
 	private ParkingLot<T> carPark;
 
-	private final void setUpParkingLot()throws IllegalArgumentException {
+	private final void setUpParkingLot() throws IllegalArgumentException {
 		this.carPark = new ParkingLot<>(this.parkingLotType, this.numberOfFloors, this.floorSize);
 	}
 
@@ -56,9 +66,9 @@ public class ValetParking<T extends Vehicle> {
 	 *             if the car was mishandled(runs out of gas)
 	 */
 	public final T retrieveVehicle(ParkingTicket ticket) throws IllegalArgumentException, RuntimeException {
-		
+
 		T vehicle = carPark.retrieveVehicle(ticket);
-		if(vehicle==null){
+		if (vehicle == null) {
 			return null;
 		}
 		vehicle.start();
@@ -87,9 +97,9 @@ public class ValetParking<T extends Vehicle> {
 	 * @param numberOfFloors
 	 * @param floorSize
 	 * @throws IllegalArgumentException
-		 *             if the parking number passed is invalid;
+	 *             if the parking number passed is invalid;
 	 */
-	public ValetParking(int numberOfFloors, int floorSize)throws IllegalArgumentException {
+	public ValetParking(int numberOfFloors, int floorSize) throws IllegalArgumentException {
 		this.numberOfFloors = numberOfFloors;
 		this.floorSize = floorSize;
 		setUpParkingLot();
@@ -98,16 +108,16 @@ public class ValetParking<T extends Vehicle> {
 	/**
 	 * constructor for custom parking lot where the number of floors, floors
 	 * size and type of parking lot are passed(any type other than Standard will
-	 * be classified as underground parking lot)
-	 * Default settings are: number of floors= 5;floor size=20;type=Standard;
+	 * be classified as underground parking lot) Default settings are: number of
+	 * floors= 5;floor size=20;type=Standard;
 	 * 
 	 * @param parkingLotType
 	 * @param numberOfFloors
 	 * @param floorSize
 	 * @throws IllegalArgumentException
-		 *             if the parking number passed is invalid;
+	 *             if the parking number passed is invalid;
 	 */
-	public ValetParking(String parkingLotType, int numberOfFloors, int floorSize)throws IllegalArgumentException {
+	public ValetParking(String parkingLotType, int numberOfFloors, int floorSize) throws IllegalArgumentException {
 		this.numberOfFloors = numberOfFloors;
 		this.floorSize = floorSize;
 		this.parkingLotType = parkingLotType;
@@ -165,8 +175,56 @@ public class ValetParking<T extends Vehicle> {
 	 */
 	@Override
 	public String toString() {
-		return "ValetParking [distanceToParkingLot=" + distanceToParkingLot + ", distanceBetwenFloors="
-				+ distanceBetwenFloors + ", numberOfFloors=" + numberOfFloors + ", floorSize=" + floorSize
-				+ ", carPark=" + carPark.toString() + "]";
+		return "ValetParking for [carPark= " + carPark.toString() + " distanceToParkingLot=" + distanceToParkingLot
+				+ ", distanceBetwenFloors=" + distanceBetwenFloors + "]";
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Float.floatToIntBits(distanceBetwenFloors);
+		result = prime * result + Float.floatToIntBits(distanceToParkingLot);
+		result = prime * result + floorSize;
+		result = prime * result + numberOfFloors;
+		result = prime * result + ((parkingLotType == null) ? 0 : parkingLotType.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		@SuppressWarnings("rawtypes")
+		ValetParking other = (ValetParking) obj;
+		if (Float.floatToIntBits(distanceBetwenFloors) != Float.floatToIntBits(other.distanceBetwenFloors))
+			return false;
+		if (Float.floatToIntBits(distanceToParkingLot) != Float.floatToIntBits(other.distanceToParkingLot))
+			return false;
+		if (floorSize != other.floorSize)
+			return false;
+		if (numberOfFloors != other.numberOfFloors)
+			return false;
+		if (parkingLotType == null) {
+			if (other.parkingLotType != null)
+				return false;
+		} else if (!parkingLotType.equals(other.parkingLotType))
+			return false;
+		return true;
+	}
+
 }

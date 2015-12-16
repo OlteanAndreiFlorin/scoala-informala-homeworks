@@ -44,10 +44,9 @@ public class ValetParkingTest {
 
 		}
 
-		/**
-		 * @return the fuel
-		 */
-		public final float getFuel() {
+		@Override
+		public float getAvailableFuel() {
+			// TODO Auto-generated method stub
 			return fuel;
 		}
 

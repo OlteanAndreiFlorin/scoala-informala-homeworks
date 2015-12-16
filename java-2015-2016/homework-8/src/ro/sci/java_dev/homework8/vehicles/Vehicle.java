@@ -12,4 +12,6 @@ public interface Vehicle {
 
 	void stop();
 
+	float getAvailableFuel();
+
 }

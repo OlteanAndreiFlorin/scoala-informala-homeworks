@@ -138,7 +138,8 @@ public class ParkingLot<E> {
 	 *            Parking ticket.
 	 * @return the vehicle parked at the specified spot or null if there is no
 	 *         car there.
-	 *@throws IllegalArgumentException if the ticket passed is invalid;
+	 * @throws IllegalArgumentException
+	 *             if the ticket passed is invalid;
 	 */
 	public final E retrieveVehicle(ParkingTicket ticket) throws IllegalArgumentException {
 		if ("Standard".equals(parkingLotType) && ticket.getNumberOfFloors() < 0) {
@@ -217,6 +218,48 @@ public class ParkingLot<E> {
 	public String toString() {
 		return "ParkingLot [parkingLotType=" + parkingLotType + ", numberOfFloors=" + numberOfFloors + ", floorSize="
 				+ floorSize + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + floorSize;
+		result = prime * result + numberOfFloors;
+		result = prime * result + ((parkingLotType == null) ? 0 : parkingLotType.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		@SuppressWarnings("rawtypes")
+		ParkingLot other = (ParkingLot) obj;
+		if (floorSize != other.floorSize)
+			return false;
+		if (numberOfFloors != other.numberOfFloors)
+			return false;
+		if (parkingLotType == null) {
+			if (other.parkingLotType != null)
+				return false;
+		} else if (!parkingLotType.equals(other.parkingLotType))
+			return false;
+		return true;
 	}
 
 }
