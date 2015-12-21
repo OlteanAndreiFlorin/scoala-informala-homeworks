@@ -9,11 +9,21 @@
 		<servlet-name>currentDate</servlet-name>
 		<servlet-class>ro.sci.servlet.CurrentDateServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>myAgeInDays</servlet-name>
+		<servlet-class>ro.sci.servlet.MyAgeInDaysServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
 		<servlet-name>currentDate</servlet-name>
 		<url-pattern>/currentDate</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>myAgeInDays</servlet-name>
+		<url-pattern>/myAge</url-pattern>
 	</servlet-mapping>
 
 
